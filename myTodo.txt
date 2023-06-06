@@ -1,0 +1,19 @@
+#Batu kertas gunting
+
+1. Buat fungsi untuk komputer memilih batu, kertas atau gunting.
+ #Fitur
+ - Dapat memilih gunting, batu, kertas secara acak. (done)
+ - dapat mengembalikan nilai. (done)
+
+ #Masalah
+- bagaimana cara agar dapat memilih secara acak ?(Solved)
+   [Kita dapat menggunakan Math.floor]
+- Apakah harus pakai array ?(Solved)
+    [Tidak perlu]
+- Tapi belum diajari array. (SOlved)
+    [Yaudah nggak pakai Array]
+2. Jangan lupa untuk menyimpan nilai function ke variable
+
+3. Buat function yang parameternya adalah playerSelection dan computerSelection
+    #Fitur
+    - Ketika user memilih Kertas, Gunting, Atau Batu maka besar kecil tidak mempengaruhi
