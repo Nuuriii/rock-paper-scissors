@@ -1,94 +1,70 @@
-function computerPlay() {
-   //pertama kita akan membuat array terlebih dahulu
-   const choices = ["rock", "paper", "scissors"];
-   //lalu kita buat variable yang nilainya itu bakalan acak antara angka 0,1,2
-   //caranya yaitu dengan menggunakan metode Math
-   const randomIndex = Math.floor(Math.random() * choices.length);
-   //lalu setelah itu, kita panggil array di variable choices dengan indexnya berasal dari variable randomIndex
-   return choices[randomIndex];
-   //karena randomIndex berisi nilai acak antara 0, 1, dan 2 maka secara otomatis function ini dapat mengembalikan nilai dari choices secara acak
-   //kalau masih bingung, coba ingat kembali ini. di array, index dimulai dari 0 bukan 1
-   //jadi itu index arraynya adalah 0,1,2.
-}
+//1. create function for computer choice
+let getComputerChoice = () => {
+   let choice = "rock paper scissors";
+   let toArr = choice.split(" ");
+   let randomChoice = Math.floor(Math.random() * toArr.length);
 
-//kemudian kita membuat function yang parameternya itu 2
-function playRound(playerSelection, computerSelection) {
-   playerSelection = playerSelection.toLowerCase();
-   //setelah kita membuat variable playerSelection, maka kita jadikan dulu nilainya agar menjadi lowercase.
-   //kenapa lowercase?, itu karena agar ketika user menginputkan nilai, maka nilai yang diinput akan tidak terpengaruh oleh besar dan kecil
+   return toArr[randomChoice];
+};
+//check this function
+//console.log(getComputerChoice());
 
-   //kemudian kita akan membuat if else untuk membuat perbandingan
+//2. write a function that plays the game in one loop
+let oneGameRound = (playerSelec, computerSelec) => {
+   let player = playerSelec.toLowerCase();
+   let result;
+   //check condition using if/else
    if (
-      //jika variable playerSelection bernilai rock dan computerSelection bernilai scissors
-      (playerSelection === "rock" && computerSelection === "scissors") || //atau
-      //jika variable playerSelection bernilai paper dan computerSelection bernilai rock
-      (playerSelection === "paper" && computerSelection === "rock") || //atau
-      //jika variable playerSelection bernilai scissors dan computerSelection bernilai paper
-      (playerSelection === "scissors" && computerSelection === "paper")
+      (player === "paper" && computerSelec === "rock") ||
+      (player === "rock" && computerSelec === "scissors") ||
+      (player === "scissors" && computerSelec === "paper")
    ) {
-      //ketika keadaan perbandingannya benar maka return dibawah ini akan dijalankan
-      return "You win! " + playerSelection + " beats " + computerSelection;
-   } else if (playerSelection === computerSelection) {
-      //jika playerSelection dan computerSelection bernilai sama
-      //maka return dibawah ini akan dijalankan.
-      return "It's a tie! You both chose " + playerSelection;
+      result = `You win! ${player} defeat ${computerSelec}`;
+   } else if (player === computerSelec) {
+      result = `draw ${player} and ${computerSelec}`;
    } else {
-      //dan ketika jawaban kita tidak ada yang sama dengan pengkodisian diatas, maka return dibawah ini akan dijalankan
-      return "You lose! " + computerSelection + " beats " + playerSelection;
+      result = `You lose! ${player} defeated ${computerSelec}`;
    }
-}
 
-function game() {
-   //kemudian kita akan membuat variable yang bertujuan untuk menyimpan skor kita ketika bertanding dengan computer nantinya
-   let playerScore = 0;
+   return result;
+};
+//check this function
+//console.log(oneGameRound("rOck", getComputerChoice()));
+
+//3. write a new function called game
+let game = () => {
+   let userScore = 0;
    let computerScore = 0;
-   let roundResult;
 
-   //dan lalu kita akan membuat pengulangan
-   //i sama dengan 0, apakah i kurang dari 5?, jika kurang dari 5 maka tingkatkan i
+   let checkResult;
+   //use loop for run the function 5 times
    for (let i = 0; i < 5; i++) {
-      //kemudian kita membuat variable yang isinya nanti adalah prompt yang betanya ke user untuk memilih antara batu, gunting, atau kertas.
-      const playerSelection = prompt("Choose rock, paper, or scissors");
-      //kemudian kita juga akan membuat variable yang nilainya itu berupa nilai dari function computerPlay()
-      const computerSelection = computerPlay();
-      //lalu kita akan mengasih nilai pada variable roundResult dengan function yang argumentnya akan berisi variable playerSelection dan computerSelection.
-      roundResult = playRound(playerSelection, computerSelection);
+      let user = prompt("Choose rock, paper or scissors");
+      let computer = getComputerChoice();
+      let checkResult = oneGameRound(user, computer);
 
-      //lalu kita tampilkan nilai dari variable roundResult ke console
-      console.log(roundResult);
-
-      //kita juga akan membuat sebuah pengkodisian lagi
-      if (roundResult.includes("win")) {
-         //jadi pertama, kita akan mencari apakah di variable roundResult terdapat string 'win'?
-         //kalau iya maka playerScore akan ditambahkan 1.
-         playerScore++;
-      } else if (roundResult.includes("lose")) {
-         //lalu kemudian, kita juga akan mencari apakah ada string yang bertuliskan lose di roundResult?
-         //kalau iya maka computerScore akan ditambahkan 1.
+      //check condition, if user win userScore++, if user lose computerScore++
+      if (checkResult.includes("win")) {
+         userScore++;
+      } else if (checkResult.includes("lose")) {
          computerScore++;
       }
+
+      console.log(checkResult);
    }
 
-   //kemudian, kita akan menampilkan ke consol score kita
-   console.log("Final Scores");
-   console.log("Player: " + playerScore);
-   console.log("Computer: " + computerScore);
+   //check the
+   let winner =
+      userScore > computerScore
+         ? "Game won by player"
+         : userScore < computerScore
+         ? "Game won by computer"
+         : "Game is draw";
 
-   //kemudian untuk menentukan pemenang, maka kita akan membuat pengkodisian lagi
-   if (playerScore > computerScore) {
-      //jika playerScore lebih besar dari computerScore
-      //maka console akan mencetak You win the game!
-      console.log("You win the game!");
-   } else if (playerScore < computerScore) {
-      //jika playerScore lebih kecil dari computerScore
-      //maka console akan mencetak You lose the game!
-      console.log("You lose the game!");
-   } else {
-      //dan jika tidak lebih besar atau lebih kecil berarti sama dong.
-      //maka kita tampilkan ke console It's a tie game!
-      console.log("It's a tie game!");
-   }
-}
+   console.log(`Player score: ${userScore}`);
+   console.log(`Computer score: ${computerScore}`);
+   console.log(winner);
+};
 
-//untuk menjalankan game ini, kita harus panggil function game()
+//4. call the function
 game();
