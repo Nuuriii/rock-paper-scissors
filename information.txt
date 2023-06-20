@@ -1,0 +1,6 @@
+#Di UI kami, pemain harus dapat memainkan game dengan mengeklik tombol alih-alih mengetik jawaban mereka di prompt.
+1. Untuk saat ini, hapus logika yang memainkan tepat lima putaran.
+.2. Buat tiga tombol, satu untuk setiap pilihan. Tambahkan event listener ke tombol yang memanggil fungsi playRound Anda dengan playerSelection yang benar setiap kali tombol diklik. (Anda dapat menyimpan console.logs untuk langkah ini)
+3. Tambahkan div untuk menampilkan hasil dan ubah semua console.logs Anda menjadi metode DOM.
+4. Tampilkan skor lari, dan umumkan pemenang permainan setelah satu pemain mencapai 5 poin.
+5. Anda mungkin harus memfaktorkan ulang (mengerjakan ulang/menulis ulang) kode asli Anda agar berfungsi untuk ini. Tidak apa-apa! Pengerjaan ulang kode lama adalah bagian penting dari kehidupan programmer.
